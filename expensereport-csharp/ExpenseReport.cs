@@ -26,6 +26,8 @@ namespace expensereport_csharp
         {
             get;
         }
+
+        public abstract string Marker {get;}
     }
 
     public class CarRentalExpense : Expense
@@ -43,6 +45,8 @@ namespace expensereport_csharp
         }
 
         public override int MealExpense => 0;
+
+        public override string Marker => " ";
     }
 
     public class DinnerExpense : Expense
@@ -54,6 +58,8 @@ namespace expensereport_csharp
         public override string ExpenseName => "Dinner";
 
         public override int MealExpense => Amount;
+
+        public override string Marker => Amount > 5000 ? "X" : " ";
     }
 
     public class BreakfastExpense : Expense
@@ -65,6 +71,8 @@ namespace expensereport_csharp
         public override string ExpenseName => "Breakfast";
 
         public override int MealExpense => Amount;
+
+        public override string Marker => Amount > 1000 ? "X" : " ";
     }
 
     public class ExpenseReport
@@ -83,11 +91,7 @@ namespace expensereport_csharp
             {
                 MealExpenses += expense.MealExpense;
 
-                ExpenseMarker =
-                    expense is DinnerExpense && expense.Amount > 5000 ||
-                    expense is BreakfastExpense && expense.Amount > 1000
-                        ? "X"
-                        : " ";
+                ExpenseMarker = expense.Marker;
 
 //expecting this to be temporary
                 ExpenseName = expense.ExpenseName;

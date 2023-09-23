@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime;
 using expensereport_csharp;
 using NUnit.Framework;
 
@@ -26,6 +27,14 @@ namespace Expenses
             Assert.AreEqual(0, expenseReport.MealExpenses);
             Assert.AreEqual(" ", expenseReport.ExpenseMarker);
             Assert.AreEqual("Car Rental", expenseReport.ExpenseName);
+        }
+
+        [Test]
+        public void PrintExpenseTotalIsOneMealExpenseIsZero()
+        {
+            var expense = new ExpensePrinterToConsole(new CarRentalExpense(1));
+
+            Assert.AreEqual("1", expense.print());
         }
 
         [Test]
@@ -74,6 +83,27 @@ namespace Expenses
             expenseReport.PrintReport(expenses);
 
             Assert.AreEqual("X", expenseReport.ExpenseMarker);
+        }
+    }
+
+public interface IPrint {
+    string print();
+}
+
+    internal class ExpensePrinterToConsole : IPrint
+    {
+        private readonly Expense Expense;
+
+        public ExpensePrinterToConsole(Expense expense)
+        {
+            this.Expense = expense;
+        }
+
+        public string print()
+        {
+            string toPrint;
+            toPrint = string.Format("{0}", this.Expense.Amount);
+            return toPrint;
         }
     }
 }
