@@ -1,3 +1,4 @@
+using System;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.VisualBasic;
 
@@ -15,7 +16,7 @@ namespace expensereport_csharp
 
         public override string Marker => Expense.Marker;
 
-        public override int Amount { get => Expense.Amount; protected set { var a = value; } }
+        public override int Amount { get => Expense.Amount; protected set { throw new NotImplementedException(); } }
 
         public ExpensePrinter(Expense expense, IOutput output)
         {

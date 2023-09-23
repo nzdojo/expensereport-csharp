@@ -7,16 +7,19 @@ namespace Expenses
 {
     public class ExpensesTests
     {
+        private FakeOutPut fakeOutput;
+        private ExpenseReport expenseReport;
+
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
+            fakeOutput = new FakeOutPut();
+            expenseReport = new ExpenseReport(fakeOutput);
         }
 
         [Test]
         public void TotalIsOneMealExpenseIsZero()
         {
-            var fakeOutput = new FakeOutPut();
-            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<ExpensePrinter>
             {
                 new ExpensePrinter(new CarRentalExpense(1), fakeOutput) 
@@ -54,8 +57,6 @@ namespace Expenses
         [Test]
         public void TotalIsOneMealExpenseForDinnerIsOne()
         {
-            var fakeOutput = new FakeOutPut();
-            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<ExpensePrinter>
             {
                 new ExpensePrinter(new DinnerExpense(1), fakeOutput)
@@ -69,8 +70,6 @@ namespace Expenses
         [Test]
         public void TotalIsOneMealExpenseForBreakFastIsOneForBreakFast()
         {
-            var fakeOutput = new FakeOutPut();
-            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<ExpensePrinter>
             {
                 new ExpensePrinter(new BreakfastExpense(1), fakeOutput) 
@@ -89,19 +88,5 @@ namespace Expenses
             Assert.AreEqual("Dinner \t 5001 \t X", expense.print());
         }
 
-        [Test]
-        public void DinnerExpenseIsMarkedWhenOverLimit()
-        {
-            var fakeOutput = new FakeOutPut();
-            var expenseReport = new ExpenseReport(fakeOutput);
-            var expenses = new List<ExpensePrinter>
-            {
-                new ExpensePrinter(new DinnerExpense(5001), fakeOutput)
-            };
-
-            expenseReport.PrintReport(expenses);
-            Assert.AreEqual("Meal expenses: 5001\r\nTotal expenses: 5001", fakeOutput.LastOutput());
-
-        }
     }
 }
