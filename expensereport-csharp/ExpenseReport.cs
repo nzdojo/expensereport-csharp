@@ -82,15 +82,19 @@ namespace expensereport_csharp
     {
         private readonly Expense Expense;
 
-        public ExpensePrinterToConsole(Expense expense)
+        public IOutput Output { get; }
+
+        public ExpensePrinterToConsole(Expense expense, IOutput output)
         {
             this.Expense = expense;
+            this.Output = output;
         }
 
         public string print()
         {
             string toPrint;
             toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker);
+            Output.Output(toPrint);
             return toPrint;
         }
     }
@@ -99,8 +103,15 @@ namespace expensereport_csharp
     {
         public int Total { get; private set; }
         public int MealExpenses { get; private set; }
-        public string ExpenseMarker { get; private set; }
         public string ExpenseName { get; private set; }
+        private IOutput output;
+
+        public ExpenseReport() : this(new ConsoleOutput()){   
+        }
+
+        public ExpenseReport(IOutput output) {
+            this.output = output;
+        }
 
         //Curious, what print capability could be decorated over the expense class
         // hard to test, the test can only verify no error occurs.  checking totals is not possible without intercepting console output
@@ -110,13 +121,25 @@ namespace expensereport_csharp
             foreach (Expense expense in expenses)
             {
                 MealExpenses += expense.MealExpense;
-
-                ExpenseMarker = expense.Marker;
-
-//expecting this to be temporary
-                ExpenseName = expense.ExpenseName;
                 Total += expense.Amount;
+                 new ExpensePrinterToConsole(expense, output).print();
             }
+
+            output.Output("Meal expenses: " + MealExpenses);
+            output.Output("Total expenses: " + Total);
         }
+    }
+
+    internal class ConsoleOutput : IOutput
+    {
+        public string Output(string output)
+        {
+            Console.WriteLine(output);
+            return output;
+        }
+    }
+
+    public interface IOutput {
+        string Output(string output);
     }
 }

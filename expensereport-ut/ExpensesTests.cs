@@ -15,7 +15,8 @@ namespace Expenses
         [Test]
         public void TotalIsOneMealExpenseIsZero()
         {
-            var expenseReport = new ExpenseReport();
+            var fakeOutput = new FakeOutPut();
+            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<Expense>
             {
                 new CarRentalExpense(1) 
@@ -25,14 +26,13 @@ namespace Expenses
 
             Assert.AreEqual(1, expenseReport.Total);
             Assert.AreEqual(0, expenseReport.MealExpenses);
-            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
-            Assert.AreEqual("Car Rental", expenseReport.ExpenseName);
+            //Assert.AreEqual("Car Rental", expenseReport.ExpenseName);
         }
 
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseIsZero()
         {
-            var expense = new ExpensePrinterToConsole(new CarRentalExpense(1));
+            var expense = new ExpensePrinterToConsole(new CarRentalExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Car Rental \t 1 \t  ", expense.print());
         }
@@ -40,7 +40,7 @@ namespace Expenses
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseForDinnerIsOne()
         {
-            var expense = new ExpensePrinterToConsole(new DinnerExpense(1));
+            var expense = new ExpensePrinterToConsole(new DinnerExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Dinner \t 1 \t  ", expense.print());
         }
@@ -48,7 +48,7 @@ namespace Expenses
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseForBreakfastIsOne()
         {
-            var expense = new ExpensePrinterToConsole(new BreakfastExpense(1));
+            var expense = new ExpensePrinterToConsole(new BreakfastExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Breakfast \t 1 \t  ", expense.print());
         }
@@ -66,8 +66,6 @@ namespace Expenses
 
             Assert.AreEqual(1, expenseReport.Total);
             Assert.AreEqual(1, expenseReport.MealExpenses);
-            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
-            Assert.AreEqual("Dinner", expenseReport.ExpenseName);
         }
 
         [Test]
@@ -83,14 +81,12 @@ namespace Expenses
 
             Assert.AreEqual(1, expenseReport.Total);
             Assert.AreEqual(1, expenseReport.MealExpenses);
-            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
-            Assert.AreEqual("Breakfast", expenseReport.ExpenseName);
         }
 
         [Test]
         public void PrintDinnerExpenseIsMarkedWhenOverLimit()
         {
-            var expense = new ExpensePrinterToConsole(new DinnerExpense(5001));
+            var expense = new ExpensePrinterToConsole(new DinnerExpense(5001), new FakeOutPut());
 
             Assert.AreEqual("Dinner \t 5001 \t X", expense.print());
         }
@@ -106,8 +102,14 @@ namespace Expenses
 
             expenseReport.PrintReport(expenses);
 
-            Assert.AreEqual("X", expenseReport.ExpenseMarker);
         }
     }
 
+    internal class FakeOutPut : IOutput
+    {
+        public string Output(string output)
+        {
+            return output;
+        }
+    }
 }
