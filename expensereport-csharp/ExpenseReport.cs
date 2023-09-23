@@ -74,6 +74,26 @@ namespace expensereport_csharp
 
         public override string Marker => Amount > 1000 ? "X" : " ";
     }
+    public interface IPrint {
+    string print();
+}
+
+    public class ExpensePrinterToConsole : IPrint
+    {
+        private readonly Expense Expense;
+
+        public ExpensePrinterToConsole(Expense expense)
+        {
+            this.Expense = expense;
+        }
+
+        public string print()
+        {
+            string toPrint;
+            toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker);
+            return toPrint;
+        }
+    }
 
     public class ExpenseReport
     {

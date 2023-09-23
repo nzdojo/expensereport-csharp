@@ -34,7 +34,7 @@ namespace Expenses
         {
             var expense = new ExpensePrinterToConsole(new CarRentalExpense(1));
 
-            Assert.AreEqual("1", expense.print());
+            Assert.AreEqual("Car Rental \t 1 \t  ", expense.print());
         }
 
         [Test]
@@ -86,24 +86,4 @@ namespace Expenses
         }
     }
 
-public interface IPrint {
-    string print();
-}
-
-    internal class ExpensePrinterToConsole : IPrint
-    {
-        private readonly Expense Expense;
-
-        public ExpensePrinterToConsole(Expense expense)
-        {
-            this.Expense = expense;
-        }
-
-        public string print()
-        {
-            string toPrint;
-            toPrint = string.Format("{0}", this.Expense.Amount);
-            return toPrint;
-        }
-    }
 }
