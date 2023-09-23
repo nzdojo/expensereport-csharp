@@ -38,6 +38,22 @@ namespace Expenses
         }
 
         [Test]
+        public void PrintExpenseTotalIsOneMealExpenseForDinnerIsOne()
+        {
+            var expense = new ExpensePrinterToConsole(new DinnerExpense(1));
+
+            Assert.AreEqual("Dinner \t 1 \t  ", expense.print());
+        }
+
+        [Test]
+        public void PrintExpenseTotalIsOneMealExpenseForBreakfastIsOne()
+        {
+            var expense = new ExpensePrinterToConsole(new BreakfastExpense(1));
+
+            Assert.AreEqual("Breakfast \t 1 \t  ", expense.print());
+        }
+
+        [Test]
         public void TotalIsOneMealExpenseForDinnerIsOne()
         {
             var expenseReport = new ExpenseReport();
@@ -69,6 +85,14 @@ namespace Expenses
             Assert.AreEqual(1, expenseReport.MealExpenses);
             Assert.AreEqual(" ", expenseReport.ExpenseMarker);
             Assert.AreEqual("Breakfast", expenseReport.ExpenseName);
+        }
+
+        [Test]
+        public void PrintDinnerExpenseIsMarkedWhenOverLimit()
+        {
+            var expense = new ExpensePrinterToConsole(new DinnerExpense(5001));
+
+            Assert.AreEqual("Dinner \t 5001 \t X", expense.print());
         }
 
         [Test]
