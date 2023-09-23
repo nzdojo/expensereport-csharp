@@ -17,7 +17,7 @@ namespace Expenses
             var expenseReport = new ExpenseReport();
             var expenses = new List<Expense>
             {
-                new() { amount = 1, type = ExpenseType.CAR_RENTAL }
+                new CarRentalExpense(1) 
             };
 
             expenseReport.PrintReport(expenses);
@@ -34,7 +34,7 @@ namespace Expenses
             var expenseReport = new ExpenseReport();
             var expenses = new List<Expense>
             {
-                new() { amount = 1, type = ExpenseType.DINNER}
+                new DinnerExpense(1)
             };
 
             expenseReport.PrintReport(expenses);
@@ -51,7 +51,7 @@ namespace Expenses
             var expenseReport = new ExpenseReport();
             var expenses = new List<Expense>
             {
-                new() { amount = 1, type = ExpenseType.BREAKFAST}
+                new BreakfastExpense(1) 
             };
 
             expenseReport.PrintReport(expenses);
@@ -68,7 +68,7 @@ namespace Expenses
             var expenseReport = new ExpenseReport();
             var expenses = new List<Expense>
             {
-                new() { amount = 5001, type = ExpenseType.BREAKFAST}
+                new DinnerExpense(5001)
             };
 
             expenseReport.PrintReport(expenses);

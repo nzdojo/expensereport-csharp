@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization.Metadata;
 
 namespace expensereport_csharp
 {
@@ -9,10 +10,50 @@ namespace expensereport_csharp
     }
 
 // Just an container, likely to have behaviour
-    public class Expense
+    public abstract class Expense
     {
-        public ExpenseType type;
-        public int amount;
+        public Expense(int amount){
+            Amount = amount;
+        }
+        
+        public int Amount { get; private set; }
+        public abstract string ExpenseName
+        {
+            get;
+        }
+    }
+
+    public class CarRentalExpense : Expense
+    {
+        public CarRentalExpense(int amount) : base(amount)
+        {
+        }
+
+        public override string ExpenseName
+        {
+            get
+            {
+                return "Car Rental";
+            }
+        }
+    }
+
+    public class DinnerExpense : Expense
+    {
+        public DinnerExpense(int amount) : base(amount)
+        {
+        }
+
+        public override string ExpenseName => "Dinner";
+    }
+
+    public class BreakfastExpense : Expense
+    {
+        public BreakfastExpense(int amount) : base(amount)
+        {
+        }
+
+        public override string ExpenseName => "Breakfast";
     }
 
     public class ExpenseReport
@@ -32,36 +73,26 @@ namespace expensereport_csharp
             // This loop need only cycle over the expenses. total is accumulated and meal expenses accumulated, but could be done without a loop?
             foreach (Expense expense in expenses)
             {
-                if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
+                if (expense is DinnerExpense || expense is BreakfastExpense)
                 {
-                    MealExpenses += expense.amount;
-                }
-
-// Remove to Expense Printer class to be a decorator
-                String expenseName = "";
-                switch (expense.type)
-                {
-                    case ExpenseType.DINNER:
-                        ExpenseName = "Dinner";
-                        break;
-                    case ExpenseType.BREAKFAST:
-                        ExpenseName = "Breakfast";
-                        break;
-                    case ExpenseType.CAR_RENTAL:
-                        ExpenseName = "Car Rental";
-                        break;
+                    MealExpenses += expense.Amount;
                 }
 
                 ExpenseMarker =
-                    expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
-                    expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
+                    expense is DinnerExpense && expense.Amount > 5000 ||
+                    expense is BreakfastExpense && expense.Amount > 1000
                         ? "X"
                         : " ";
 
-// avoid console writing here
-                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + ExpenseMarker);
+//expecting this to be temporary
+                ExpenseName = expense.ExpenseName;
 
-                Total += expense.amount;
+// avoid console writing here
+                Console.WriteLine(expense.
+// avoid console writing here
+                ExpenseName+ "\t" + expense.Amount + "\t" + ExpenseMarker);
+
+                Total += expense.Amount;
             }
 
             Console.WriteLine("Meal expenses: " + MealExpenses);
