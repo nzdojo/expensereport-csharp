@@ -32,7 +32,7 @@ namespace Expenses
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseIsZero()
         {
-            var expense = new ExpensePrinterToConsole(new CarRentalExpense(1), new FakeOutPut());
+            var expense = new ExpensePrinter(new CarRentalExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Car Rental \t 1 \t  ", expense.print());
         }
@@ -40,7 +40,7 @@ namespace Expenses
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseForDinnerIsOne()
         {
-            var expense = new ExpensePrinterToConsole(new DinnerExpense(1), new FakeOutPut());
+            var expense = new ExpensePrinter(new DinnerExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Dinner \t 1 \t  ", expense.print());
         }
@@ -48,7 +48,7 @@ namespace Expenses
         [Test]
         public void PrintExpenseTotalIsOneMealExpenseForBreakfastIsOne()
         {
-            var expense = new ExpensePrinterToConsole(new BreakfastExpense(1), new FakeOutPut());
+            var expense = new ExpensePrinter(new BreakfastExpense(1), new FakeOutPut());
 
             Assert.AreEqual("Breakfast \t 1 \t  ", expense.print());
         }
@@ -86,7 +86,7 @@ namespace Expenses
         [Test]
         public void PrintDinnerExpenseIsMarkedWhenOverLimit()
         {
-            var expense = new ExpensePrinterToConsole(new DinnerExpense(5001), new FakeOutPut());
+            var expense = new ExpensePrinter(new DinnerExpense(5001), new FakeOutPut());
 
             Assert.AreEqual("Dinner \t 5001 \t X", expense.print());
         }
@@ -102,14 +102,6 @@ namespace Expenses
 
             expenseReport.PrintReport(expenses);
 
-        }
-    }
-
-    internal class FakeOutPut : IOutput
-    {
-        public string Output(string output)
-        {
-            return output;
         }
     }
 }
