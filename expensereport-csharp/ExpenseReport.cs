@@ -66,10 +66,7 @@ namespace expensereport_csharp
         //Curious, what print capability could be decorated over the expense class
         // hard to test, the test can only verify no error occurs.  checking totals is not possible without intercepting console output
         public void PrintReport(List<Expense> expenses)
-        {
-// Not needed here
-            Console.WriteLine("Expenses " + DateTime.Now);
-            
+        {            
             // This loop need only cycle over the expenses. total is accumulated and meal expenses accumulated, but could be done without a loop?
             foreach (Expense expense in expenses)
             {
@@ -86,17 +83,8 @@ namespace expensereport_csharp
 
 //expecting this to be temporary
                 ExpenseName = expense.ExpenseName;
-
-// avoid console writing here
-                Console.WriteLine(expense.
-// avoid console writing here
-                ExpenseName+ "\t" + expense.Amount + "\t" + ExpenseMarker);
-
                 Total += expense.Amount;
             }
-
-            Console.WriteLine("Meal expenses: " + MealExpenses);
-            Console.WriteLine("Total expenses: " + Total);
         }
     }
 }
