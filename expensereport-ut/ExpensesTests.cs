@@ -24,10 +24,12 @@ namespace Expenses
 
             Assert.AreEqual(1, expenseReport.Total);
             Assert.AreEqual(0, expenseReport.MealExpenses);
+            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
+            Assert.AreEqual("Car Rental", expenseReport.ExpenseName);
         }
 
         [Test]
-        public void TotalIsOneMealExpenseIsOne()
+        public void TotalIsOneMealExpenseForDinnerIsOne()
         {
             var expenseReport = new ExpenseReport();
             var expenses = new List<Expense>
@@ -39,6 +41,39 @@ namespace Expenses
 
             Assert.AreEqual(1, expenseReport.Total);
             Assert.AreEqual(1, expenseReport.MealExpenses);
+            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
+            Assert.AreEqual("Dinner", expenseReport.ExpenseName);
+        }
+
+        [Test]
+        public void TotalIsOneMealExpenseForBreakFastIsOneForBreakFast()
+        {
+            var expenseReport = new ExpenseReport();
+            var expenses = new List<Expense>
+            {
+                new() { amount = 1, type = ExpenseType.BREAKFAST}
+            };
+
+            expenseReport.PrintReport(expenses);
+
+            Assert.AreEqual(1, expenseReport.Total);
+            Assert.AreEqual(1, expenseReport.MealExpenses);
+            Assert.AreEqual(" ", expenseReport.ExpenseMarker);
+            Assert.AreEqual("Breakfast", expenseReport.ExpenseName);
+        }
+
+        [Test]
+        public void DinnerExpenseIsMarkedWhenOverLimit()
+        {
+            var expenseReport = new ExpenseReport();
+            var expenses = new List<Expense>
+            {
+                new() { amount = 5001, type = ExpenseType.BREAKFAST}
+            };
+
+            expenseReport.PrintReport(expenses);
+
+            Assert.AreEqual("X", expenseReport.ExpenseMarker);
         }
     }
 }

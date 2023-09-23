@@ -19,6 +19,8 @@ namespace expensereport_csharp
     {
         public int Total { get; private set; }
         public int MealExpenses { get; private set; }
+        public string ExpenseMarker { get; private set; }
+        public string ExpenseName { get; private set; }
 
         //Curious, what print capability could be decorated over the expense class
         // hard to test, the test can only verify no error occurs.  checking totals is not possible without intercepting console output
@@ -40,24 +42,24 @@ namespace expensereport_csharp
                 switch (expense.type)
                 {
                     case ExpenseType.DINNER:
-                        expenseName = "Dinner";
+                        ExpenseName = "Dinner";
                         break;
                     case ExpenseType.BREAKFAST:
-                        expenseName = "Breakfast";
+                        ExpenseName = "Breakfast";
                         break;
                     case ExpenseType.CAR_RENTAL:
-                        expenseName = "Car Rental";
+                        ExpenseName = "Car Rental";
                         break;
                 }
 
-                String mealOverExpensesMarker =
+                ExpenseMarker =
                     expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
                     expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
                         ? "X"
                         : " ";
 
 // avoid console writing here
-                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + ExpenseMarker);
 
                 Total += expense.amount;
             }
