@@ -5,6 +5,8 @@ namespace expensereport_csharp
 
     public class ExpenseReport
     {
+    
+
         private IOutput output;
 
         public ExpenseReport() : this(new ConsoleOutput()){   

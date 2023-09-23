@@ -2,6 +2,7 @@ namespace expensereport_csharp
 {
     public class CarRentalExpense : Expense
     {
+        private int amount;
 
         public CarRentalExpense(int amount) 
         {
@@ -20,6 +21,6 @@ namespace expensereport_csharp
 
         public override string Marker => " ";
 
-        public override int Amount { get => this.Amount; protected set => this.Amount = value; }
+        public override int Amount { get => this.amount; protected set => this.amount = value; }
     }
 }
