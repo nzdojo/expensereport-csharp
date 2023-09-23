@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Serialization.Metadata;
 
 namespace expensereport_csharp
@@ -21,6 +22,10 @@ namespace expensereport_csharp
         {
             get;
         }
+        public abstract int MealExpense
+        {
+            get;
+        }
     }
 
     public class CarRentalExpense : Expense
@@ -36,6 +41,8 @@ namespace expensereport_csharp
                 return "Car Rental";
             }
         }
+
+        public override int MealExpense => 0;
     }
 
     public class DinnerExpense : Expense
@@ -45,6 +52,8 @@ namespace expensereport_csharp
         }
 
         public override string ExpenseName => "Dinner";
+
+        public override int MealExpense => Amount;
     }
 
     public class BreakfastExpense : Expense
@@ -54,6 +63,8 @@ namespace expensereport_csharp
         }
 
         public override string ExpenseName => "Breakfast";
+
+        public override int MealExpense => Amount;
     }
 
     public class ExpenseReport
@@ -70,10 +81,7 @@ namespace expensereport_csharp
             // This loop need only cycle over the expenses. total is accumulated and meal expenses accumulated, but could be done without a loop?
             foreach (Expense expense in expenses)
             {
-                if (expense is DinnerExpense || expense is BreakfastExpense)
-                {
-                    MealExpenses += expense.Amount;
-                }
+                MealExpenses += expense.MealExpense;
 
                 ExpenseMarker =
                     expense is DinnerExpense && expense.Amount > 5000 ||
