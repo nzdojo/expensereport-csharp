@@ -17,14 +17,13 @@ namespace expensereport_csharp
 
     public class ExpenseReport
     {
-        public int Total { get; set; }
+        public int Total { get; private set; }
+        public int MealExpenses { get; private set; }
 
         //Curious, what print capability could be decorated over the expense class
         // hard to test, the test can only verify no error occurs.  checking totals is not possible without intercepting console output
         public void PrintReport(List<Expense> expenses)
         {
-            int total = 0;
-            int mealExpenses = 0;
 // Not needed here
             Console.WriteLine("Expenses " + DateTime.Now);
             
@@ -33,7 +32,7 @@ namespace expensereport_csharp
             {
                 if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
                 {
-                    mealExpenses += expense.amount;
+                    MealExpenses += expense.amount;
                 }
 
 // Remove to Expense Printer class to be a decorator
@@ -60,11 +59,11 @@ namespace expensereport_csharp
 // avoid console writing here
                 Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
-                total += expense.amount;
+                Total += expense.amount;
             }
 
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-            Console.WriteLine("Total expenses: " + total);
+            Console.WriteLine("Meal expenses: " + MealExpenses);
+            Console.WriteLine("Total expenses: " + Total);
         }
     }
 }
