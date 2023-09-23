@@ -14,15 +14,15 @@ namespace expensereport_csharp
             this.output = output;
         }
 
-        public void PrintReport(List<Expense> expenses)
+        public void PrintReport(List<ExpensePrinter> expenses)
         {    
             int mealExpenses = 0;        
             int total = 0;
-            foreach (Expense expense in expenses)
+            foreach (ExpensePrinter expensePrinter in expenses)
             {
-                mealExpenses += expense.MealExpense;
-                total += expense.Amount;
-                new ExpensePrinter(expense, output).print();
+                mealExpenses += expensePrinter.MealExpense;
+                total += expensePrinter.Amount;
+                expensePrinter.print();
             }
             output.Output(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", mealExpenses, total));
         }

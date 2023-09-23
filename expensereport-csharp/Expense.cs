@@ -3,11 +3,9 @@ namespace expensereport_csharp
     // Just an container, likely to have behaviour
     public abstract class Expense
     {
-        public Expense(int amount){
-            Amount = amount;
-        }
         
-        public int Amount { get; private set; }
+        public abstract int Amount { get; protected set; }
+
         public abstract string ExpenseName
         {
             get;

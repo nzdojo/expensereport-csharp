@@ -17,9 +17,9 @@ namespace Expenses
         {
             var fakeOutput = new FakeOutPut();
             var expenseReport = new ExpenseReport(fakeOutput);
-            var expenses = new List<Expense>
+            var expenses = new List<ExpensePrinter>
             {
-                new CarRentalExpense(1) 
+                new ExpensePrinter(new CarRentalExpense(1), fakeOutput) 
             };
 
             expenseReport.PrintReport(expenses);
@@ -56,9 +56,9 @@ namespace Expenses
         {
             var fakeOutput = new FakeOutPut();
             var expenseReport = new ExpenseReport(fakeOutput);
-            var expenses = new List<Expense>
+            var expenses = new List<ExpensePrinter>
             {
-                new DinnerExpense(1)
+                new ExpensePrinter(new DinnerExpense(1), fakeOutput)
             };
 
             expenseReport.PrintReport(expenses);
@@ -71,9 +71,9 @@ namespace Expenses
         {
             var fakeOutput = new FakeOutPut();
             var expenseReport = new ExpenseReport(fakeOutput);
-            var expenses = new List<Expense>
+            var expenses = new List<ExpensePrinter>
             {
-                new BreakfastExpense(1) 
+                new ExpensePrinter(new BreakfastExpense(1), fakeOutput) 
             };
 
             expenseReport.PrintReport(expenses);
@@ -94,9 +94,9 @@ namespace Expenses
         {
             var fakeOutput = new FakeOutPut();
             var expenseReport = new ExpenseReport(fakeOutput);
-            var expenses = new List<Expense>
+            var expenses = new List<ExpensePrinter>
             {
-                new DinnerExpense(5001)
+                new ExpensePrinter(new DinnerExpense(5001), fakeOutput)
             };
 
             expenseReport.PrintReport(expenses);

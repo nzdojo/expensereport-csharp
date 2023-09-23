@@ -1,10 +1,20 @@
+using System.Reflection.Metadata.Ecma335;
+
 namespace expensereport_csharp
 {
-    public class ExpensePrinter : IPrint
+    public class ExpensePrinter : Expense, IPrint
     {
         private readonly Expense Expense;
 
         public IOutput Output { get; }
+
+        public override string ExpenseName => Expense.ExpenseName;
+
+        public override int MealExpense => Expense.MealExpense;
+
+        public override string Marker => Expense.Marker;
+
+        public override int Amount { get => Expense.Amount; protected set => throw new System.NotImplementedException(); }
 
         public ExpensePrinter(Expense expense, IOutput output)
         {
