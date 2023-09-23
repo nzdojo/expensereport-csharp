@@ -24,9 +24,7 @@ namespace Expenses
 
             expenseReport.PrintReport(expenses);
 
-            Assert.AreEqual(1, expenseReport.Total);
-            Assert.AreEqual(0, expenseReport.MealExpenses);
-            //Assert.AreEqual("Car Rental", expenseReport.ExpenseName);
+            Assert.AreEqual("Meal expenses: 0\r\nTotal expenses: 1", fakeOutput.LastOutput());
         }
 
         [Test]
@@ -56,7 +54,8 @@ namespace Expenses
         [Test]
         public void TotalIsOneMealExpenseForDinnerIsOne()
         {
-            var expenseReport = new ExpenseReport();
+            var fakeOutput = new FakeOutPut();
+            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<Expense>
             {
                 new DinnerExpense(1)
@@ -64,14 +63,14 @@ namespace Expenses
 
             expenseReport.PrintReport(expenses);
 
-            Assert.AreEqual(1, expenseReport.Total);
-            Assert.AreEqual(1, expenseReport.MealExpenses);
+            Assert.AreEqual("Meal expenses: 1\r\nTotal expenses: 1", fakeOutput.LastOutput());
         }
 
         [Test]
         public void TotalIsOneMealExpenseForBreakFastIsOneForBreakFast()
         {
-            var expenseReport = new ExpenseReport();
+            var fakeOutput = new FakeOutPut();
+            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<Expense>
             {
                 new BreakfastExpense(1) 
@@ -79,8 +78,7 @@ namespace Expenses
 
             expenseReport.PrintReport(expenses);
 
-            Assert.AreEqual(1, expenseReport.Total);
-            Assert.AreEqual(1, expenseReport.MealExpenses);
+            Assert.AreEqual("Meal expenses: 1\r\nTotal expenses: 1", fakeOutput.LastOutput());
         }
 
         [Test]
@@ -94,13 +92,15 @@ namespace Expenses
         [Test]
         public void DinnerExpenseIsMarkedWhenOverLimit()
         {
-            var expenseReport = new ExpenseReport();
+            var fakeOutput = new FakeOutPut();
+            var expenseReport = new ExpenseReport(fakeOutput);
             var expenses = new List<Expense>
             {
                 new DinnerExpense(5001)
             };
 
             expenseReport.PrintReport(expenses);
+            Assert.AreEqual("Meal expenses: 5001\r\nTotal expenses: 5001", fakeOutput.LastOutput());
 
         }
     }
