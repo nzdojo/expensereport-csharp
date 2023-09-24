@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace expensereport_csharp
+﻿namespace expensereport_csharp
 {
 
     public class ExpenseReport
