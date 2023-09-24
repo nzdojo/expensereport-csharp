@@ -18,12 +18,14 @@ namespace expensereport_csharp
             }
         }
 
-        public int MealExpenses { get {
+        public int MealExpenses { 
+            get {
                 return this.expensePrinters.Sum(e => e.MealExpense);
             } 
         }
 
-        public int Total { get {
+        public int Total { 
+            get {
                 return this.expensePrinters.Sum(e => e.Amount);
             } 
         }
