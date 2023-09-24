@@ -2,17 +2,12 @@ using System;
 
 namespace expensereport_csharp
 {
-    public class ConsoleOutput : IOutput
+    public class ConsoleOutput : IDisplay
     {
-        public string Print(string output)
+        public string Display(string toDisplay)
         {
-            Console.WriteLine(output);
-            return output;
-        }
-
-        public string Print()
-        {
-            return Print(null);
+            Console.WriteLine(toDisplay);
+            return toDisplay;
         }
     }
 }

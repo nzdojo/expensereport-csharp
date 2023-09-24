@@ -104,7 +104,7 @@ namespace expensereport_csharp
         [Test]
         public void ExpenseReportPrints()
         {
-            IOutput fakeOutput = new FakeOutPut();
+            IDisplay fakeOutput = new FakeOutPut();
             //TODO accumulate the fakeoutput to check it for correctness
             var expenseReport = new ExpenseReport(
                         new Expenses(

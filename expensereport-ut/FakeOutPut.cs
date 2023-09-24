@@ -1,7 +1,7 @@
 
 namespace expensereport_csharp
 {
-    internal class FakeOutPut : IOutput
+    internal class FakeOutPut : IDisplay
     {
         string lastOutput;
 
@@ -9,15 +9,10 @@ namespace expensereport_csharp
         {
         }
 
-        public string Print(string output)
+        public string Display(string output)
         {
             lastOutput = output;
             return output;
-        }
-
-        public string Print()
-        {
-            return Print(null);
         }
 
         internal string LastOutput()

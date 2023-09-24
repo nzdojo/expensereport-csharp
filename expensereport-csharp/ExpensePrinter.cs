@@ -22,16 +22,11 @@ namespace expensereport_csharp
             this.Expense = expense;
         }
 
-        public string Print(string output)
+        public string Print()
         {
             string toPrint;
             toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker).Trim();
             return toPrint;
-        }
-
-        public string Print()
-        {
-            return Print(null);
         }
     }
 }
