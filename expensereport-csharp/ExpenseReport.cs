@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -17,15 +18,8 @@ namespace expensereport_csharp
 
         public void PrintReport(List<ExpensePrinter> expenses)
         {    
-            int mealExpenses = 0;        
-            int total = 0;
-            foreach (ExpensePrinter expensePrinter in expenses)
-            {
-                mealExpenses += expensePrinter.MealExpense;
-                total += expensePrinter.Amount;
-                expensePrinter.Print();
-            }
-            output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", mealExpenses, total));
+            expenses.ForEach(e => e.Print());
+            output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", expenses.Sum(e => e.MealExpense), expenses.Sum(e => e.Amount)));
         }
     }
 }
