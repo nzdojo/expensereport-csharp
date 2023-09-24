@@ -35,7 +35,7 @@ namespace Expenses
         {
             var expense = new ExpensePrinter(new CarRentalExpense(1), new FakeOutPut());
 
-            Assert.AreEqual("Car Rental \t 1 \t  ", expense.print());
+            Assert.AreEqual("Car Rental \t 1 \t  ", expense.Print());
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Expenses
         {
             var expense = new ExpensePrinter(new DinnerExpense(1), new FakeOutPut());
 
-            Assert.AreEqual("Dinner \t 1 \t  ", expense.print());
+            Assert.AreEqual("Dinner \t 1 \t  ", expense.Print());
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Expenses
         {
             var expense = new ExpensePrinter(new BreakfastExpense(1), new FakeOutPut());
 
-            Assert.AreEqual("Breakfast \t 1 \t  ", expense.print());
+            Assert.AreEqual("Breakfast \t 1 \t  ", expense.Print());
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Expenses
         {
             var expense = new ExpensePrinter(new DinnerExpense(5001), new FakeOutPut());
 
-            Assert.AreEqual("Dinner \t 5001 \t X", expense.print());
+            Assert.AreEqual("Dinner \t 5001 \t X", expense.Print());
         }
 
     }

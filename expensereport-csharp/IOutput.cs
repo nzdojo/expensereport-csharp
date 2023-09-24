@@ -1,6 +1,7 @@
 namespace expensereport_csharp
 {
     public interface IOutput {
-        string Output(string output);
+        string Print(string output);
+        string Print();
     }
 }

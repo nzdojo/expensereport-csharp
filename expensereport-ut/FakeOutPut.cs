@@ -7,10 +7,19 @@ namespace Expenses
     {
         string lastOutput;
 
-        public string Output(string output)
+        public FakeOutPut()
+        {
+        }
+
+        public string Print(string output)
         {
             lastOutput = output;
             return output;
+        }
+
+        public string Print()
+        {
+            return Print(null);
         }
 
         internal string LastOutput()

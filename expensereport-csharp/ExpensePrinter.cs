@@ -1,10 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.VisualBasic;
 
 namespace expensereport_csharp
 {
-    public class ExpensePrinter : Expense, IPrint
+    public class ExpensePrinter : Expense, IOutput
     {
         private readonly Expense Expense;
 
@@ -24,12 +25,17 @@ namespace expensereport_csharp
             this.Output = output;
         }
 
-        public string print()
+        public string Print(string output)
         {
             string toPrint;
             toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker);
-            Output.Output(toPrint);
+            Output.Print(toPrint);
             return toPrint;
+        }
+
+        public string Print()
+        {
+            return Print(null);
         }
     }
 }

@@ -6,7 +6,6 @@ namespace expensereport_csharp
     public class ExpenseReport
     {
     
-
         private IOutput output;
 
         public ExpenseReport() : this(new ConsoleOutput()){   
@@ -24,9 +23,9 @@ namespace expensereport_csharp
             {
                 mealExpenses += expensePrinter.MealExpense;
                 total += expensePrinter.Amount;
-                expensePrinter.print();
+                expensePrinter.Print();
             }
-            output.Output(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", mealExpenses, total));
+            output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", mealExpenses, total));
         }
     }
 }
