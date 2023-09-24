@@ -1,7 +1,5 @@
-using System;
-using expensereport_csharp;
 
-namespace Expenses
+namespace expensereport_csharp
 {
     internal class FakeOutPut : IOutput
     {
