@@ -16,7 +16,7 @@ namespace expensereport_csharp
             this.output = output;
         }
 
-        public void PrintReport(List<ExpensePrinter> expenses)
+        public void Print(List<ExpensePrinter> expenses)
         {    
             expenses.ForEach(e => e.Print());
             output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", expenses.Sum(e => e.MealExpense), expenses.Sum(e => e.Amount)));

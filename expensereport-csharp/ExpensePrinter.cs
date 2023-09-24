@@ -28,7 +28,7 @@ namespace expensereport_csharp
         public string Print(string output)
         {
             string toPrint;
-            toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker);
+            toPrint = string.Format("{0} \t {1} \t {2}", this.Expense.ExpenseName, this.Expense.Amount, this.Expense.Marker).Trim();
             Output.Print(toPrint);
             return toPrint;
         }

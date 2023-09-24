@@ -5,14 +5,14 @@
         static void Main(string[] args)
         {
             var printableExpenses = new List<ExpensePrinter>();
-            var consoleOutputter = new ConsoleOutput();
+            var consoleOutput = new ConsoleOutput();
 
-            printableExpenses.Add(new ExpensePrinter(new DinnerExpense(2), consoleOutputter));
-            printableExpenses.Add(new ExpensePrinter(new BreakfastExpense(1), consoleOutputter));
-            printableExpenses.Add(new ExpensePrinter(new CarRentalExpense(10), consoleOutputter));
+            printableExpenses.Add(new ExpensePrinter(new DinnerExpense(2), consoleOutput));
+            printableExpenses.Add(new ExpensePrinter(new BreakfastExpense(1), consoleOutput));
+            printableExpenses.Add(new ExpensePrinter(new CarRentalExpense(10), consoleOutput));
 
-            var expenseReport = new ExpenseReport(consoleOutputter);
-            expenseReport.PrintReport(printableExpenses);
+            var expenseReport = new ExpenseReport(consoleOutput);
+            expenseReport.Print(printableExpenses);
 
         }
     }
