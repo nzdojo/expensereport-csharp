@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -17,14 +18,19 @@ namespace expensereport_csharp
             }
         }
 
+        public int MealExpenses { get {
+                return this.expensePrinters.Sum(e => e.MealExpense);
+            } 
+        }
+
+        public int Total { get {
+                return this.expensePrinters.Sum(e => e.Amount);
+            } 
+        }
+
         public IEnumerator<ExpensePrinter> GetEnumerator()
         {
             return expensePrinters.GetEnumerator();
-        }
-
-        internal void ForEach(Func<object, object> value)
-        {
-            throw new NotImplementedException();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

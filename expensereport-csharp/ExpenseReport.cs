@@ -21,8 +21,7 @@ namespace expensereport_csharp
         {    
             foreach (var e in this.expenses)
                 output.Print(e.Print());
-                //TODO: Possible that the sums can come from the collection
-            output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", expenses.Sum(e => e.MealExpense), expenses.Sum(e => e.Amount)));
+            output.Print(string.Format("Meal expenses: {0}\r\nTotal expenses: {1}", expenses.MealExpenses, expenses.Total));
         }
     }
 }
