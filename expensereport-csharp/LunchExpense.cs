@@ -20,10 +20,7 @@ namespace expensereport_csharp
         {
             get => this.amount; protected set
             {
-                if (value <= MAX)
-                    this.amount = value;
-                else
-                    this.amount = MAX;
+                this.amount = value <= MAX ? value : MAX;
             }
         }
     }
